@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Theme CSS Variables */
+:root,
+.theme-light {
+  --card-bg: #ffffff;
+  --card-text: #1A1A1A;
+  --card-text-muted: #4B5563;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.2);
+  --section-bg: #FDF5E6;
+  --section-heading: #1A1A1A;
+}
+
+.theme-dark {
+  --card-bg: #2D2D2D;
+  --card-text: #F5F5F5;
+  --card-text-muted: #A0A0A0;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: rgba(0, 0, 0, 0.5);
+  --section-bg: #1A1A1A;
+  --section-heading: #F5F5F5;
+}
+
+.theme-scarlet {
+  --card-bg: #2A1215;
+  --card-text: #FDF5E6;
+  --card-text-muted: #D4A0A8;
+  --card-shadow: rgba(196, 30, 58, 0.3);
+  --card-shadow-hover: rgba(196, 30, 58, 0.5);
+  --section-bg: #1A0A0C;
+  --section-heading: #FFD700;
+}
+
+.theme-gold {
+  --card-bg: #2A2510;
+  --card-text: #FDF5E6;
+  --card-text-muted: #D4C8A0;
+  --card-shadow: rgba(255, 215, 0, 0.2);
+  --card-shadow-hover: rgba(255, 215, 0, 0.4);
+  --section-bg: #1A1708;
+  --section-heading: #FFD700;
+}
+
+/* Theme transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Themed card styles */
+.card-themed {
+  background-color: var(--card-bg);
+  box-shadow: 0 10px 15px -3px var(--card-shadow), 0 4px 6px -4px var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.card-themed:hover {
+  box-shadow: 0 25px 50px -12px var(--card-shadow-hover);
+}
+
+.card-title {
+  color: var(--card-text);
+}
+
+.card-text {
+  color: var(--card-text-muted);
+}
+
+/* Themed section backgrounds */
+.section-themed {
+  background-color: var(--section-bg);
+  transition: background-color 0.3s ease;
+}
+
+.section-heading {
+  color: var(--section-heading);
+}

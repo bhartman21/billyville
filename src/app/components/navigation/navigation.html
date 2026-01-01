@@ -1,0 +1,48 @@
+<header class="w-full bg-usmc-black text-white sticky top-0 z-50 shadow-lg">
+  <nav class="w-full px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex justify-between items-center">
+      <!-- Logo / Brand -->
+      <a href="#/" class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-usmc-scarlet rounded-full flex items-center justify-center">
+          <span class="text-usmc-gold font-bold text-xl">B</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold">
+          <span class="text-usmc-gold">Billy</span><span class="text-white">Ville</span>
+        </h1>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        @for (link of navLinks; track link.route) {
+          <a [href]="link.href"
+             class="transition-colors"
+             [class.text-usmc-gold]="isActive(link.route)"
+             [class.hover:text-usmc-gold-light]="isActive(link.route)"
+             [class.font-semibold]="isActive(link.route)"
+             [class.text-white]="!isActive(link.route)"
+             [class.hover:text-usmc-gold]="!isActive(link.route)">
+            {{ link.label }}
+          </a>
+        }
+
+        <!-- Social Links (optional) -->
+        @if (showSocialLinks()) {
+          <a href="https://www.linkedin.com/in/billy-hartman-9743221/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-usmc-gold transition-colors" title="LinkedIn">
+            <i class="fab fa-linkedin text-2xl"></i>
+          </a>
+          <a href="https://github.com/bhartman21" target="_blank" rel="noopener noreferrer" class="text-white hover:text-usmc-gold transition-colors" title="GitHub">
+            <i class="fab fa-github text-2xl"></i>
+          </a>
+        }
+
+        <!-- Theme Toggle -->
+        <app-theme-toggle class="ml-4" />
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white hover:text-usmc-gold">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </nav>
+</header>

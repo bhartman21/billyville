@@ -1,0 +1,12 @@
+<a [href]="link()" class="group block h-full">
+  <div class="card-themed rounded-xl shadow-lg hover:shadow-2xl p-6 sm:p-8 border-t-4 transform hover:-translate-y-2 transition-all duration-300 h-full"
+       [ngClass]="borderColorClass">
+    <div class="w-14 h-14 rounded-lg flex items-center justify-center mb-6 transition-colors"
+         [ngClass]="[iconBgClass, iconBgHoverClass]">
+      <i [class]="iconClass + ' text-3xl transition-colors'"
+         [ngClass]="[iconColorClass, iconHoverColorClass]"></i>
+    </div>
+    <h4 class="text-xl sm:text-2xl font-bold card-title mb-3">{{ title() }}</h4>
+    <p class="card-text leading-relaxed">{{ description() }}</p>
+  </div>
+</a>

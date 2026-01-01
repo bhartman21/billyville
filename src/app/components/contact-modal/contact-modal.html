@@ -1,0 +1,116 @@
+<div class="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+     (click)="onBackdropClick($event)">
+  <div class="modal-content card-themed rounded-2xl shadow-2xl w-full max-w-md transform transition-all">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+      <h2 class="text-2xl font-bold card-title flex items-center gap-2">
+        <i class="fas fa-envelope text-usmc-scarlet"></i>
+        Get In Touch
+      </h2>
+      <button (click)="closeModal()"
+              class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Success Message -->
+    @if (submitStatus === 'success') {
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-check text-3xl text-green-600 dark:text-green-400"></i>
+        </div>
+        <h3 class="text-xl font-bold card-title mb-2">Message Sent!</h3>
+        <p class="card-text">Thank you for reaching out. I'll get back to you soon.</p>
+      </div>
+    } @else {
+      <!-- Form -->
+      <form (ngSubmit)="submitForm()" class="p-6 space-y-4">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium card-text mb-1">Name *</label>
+          <input type="text"
+                 id="name"
+                 [(ngModel)]="formData.name"
+                 name="name"
+                 required
+                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                        bg-white dark:bg-gray-800 card-text
+                        focus:ring-2 focus:ring-usmc-scarlet focus:border-transparent
+                        transition-colors"
+                 placeholder="Your name">
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium card-text mb-1">Email *</label>
+          <input type="email"
+                 id="email"
+                 [(ngModel)]="formData.email"
+                 name="email"
+                 required
+                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                        bg-white dark:bg-gray-800 card-text
+                        focus:ring-2 focus:ring-usmc-scarlet focus:border-transparent
+                        transition-colors"
+                 placeholder="your.email@example.com">
+        </div>
+
+        <!-- Subject/Title -->
+        <div>
+          <label for="title" class="block text-sm font-medium card-text mb-1">Subject</label>
+          <input type="text"
+                 id="title"
+                 [(ngModel)]="formData.title"
+                 name="title"
+                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                        bg-white dark:bg-gray-800 card-text
+                        focus:ring-2 focus:ring-usmc-scarlet focus:border-transparent
+                        transition-colors"
+                 placeholder="What's this about?">
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-sm font-medium card-text mb-1">Message *</label>
+          <textarea id="message"
+                    [(ngModel)]="formData.message"
+                    name="message"
+                    required
+                    rows="4"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-800 card-text
+                           focus:ring-2 focus:ring-usmc-scarlet focus:border-transparent
+                           transition-colors resize-none"
+                    placeholder="Your message..."></textarea>
+        </div>
+
+        <!-- Error Message -->
+        @if (submitStatus === 'error') {
+          <div class="p-3 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-lg">
+            <p class="text-red-700 dark:text-red-400 text-sm flex items-center gap-2">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ errorMessage }}
+            </p>
+          </div>
+        }
+
+        <!-- Submit Button -->
+        <button type="submit"
+                [disabled]="isSubmitting || !formData.name || !formData.email || !formData.message"
+                class="w-full py-3 px-6 bg-usmc-scarlet hover:bg-usmc-scarlet-light
+                       disabled:bg-gray-400 disabled:cursor-not-allowed
+                       text-white font-bold rounded-lg shadow-lg
+                       hover:shadow-xl transform hover:-translate-y-0.5
+                       transition-all duration-300 flex items-center justify-center gap-2">
+          @if (isSubmitting) {
+            <i class="fas fa-spinner fa-spin"></i>
+            Sending...
+          } @else {
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          }
+        </button>
+      </form>
+    }
+  </div>
+</div>

@@ -1,0 +1,149 @@
+<div class="min-h-screen flex flex-col">
+  <app-navigation activeRoute="projects" />
+
+  <!-- Page Header -->
+  <section class="w-full bg-gradient-to-br from-usmc-scarlet via-usmc-scarlet-dark to-usmc-black text-white py-16">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+          <span class="text-usmc-gold">My</span> <span class="text-usmc-cream">Projects</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-usmc-cream/80">Personal projects, experiments, and contributions</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="flex-grow section-themed py-12 sm:py-16">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <!-- Category Filter -->
+        <div class="mb-8">
+          <div class="flex flex-wrap gap-3 justify-center">
+            <button
+              (click)="setCategory('all')"
+              class="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+              [class.bg-usmc-scarlet]="selectedCategory === 'all'"
+              [class.text-white]="selectedCategory === 'all'"
+              [class.bg-usmc-black/20]="selectedCategory !== 'all'"
+              [class.card-text]="selectedCategory !== 'all'"
+              [class.hover:bg-usmc-scarlet/50]="selectedCategory !== 'all'">
+              All Projects
+            </button>
+            @for (cat of categories; track cat.value) {
+              <button
+                (click)="setCategory(cat.value)"
+                class="px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
+                [class.bg-usmc-scarlet]="selectedCategory === cat.value"
+                [class.text-white]="selectedCategory === cat.value"
+                [class.bg-usmc-black/20]="selectedCategory !== cat.value"
+                [class.card-text]="selectedCategory !== cat.value"
+                [class.hover:bg-usmc-scarlet/50]="selectedCategory !== cat.value">
+                <i [class]="cat.icon"></i>
+                {{ cat.label }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          @for (project of filteredProjects; track project.title) {
+            <div class="card-themed rounded-xl p-6 border-l-4 border-usmc-scarlet hover:shadow-xl transition-all duration-300">
+              <!-- Project Header -->
+              <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-usmc-scarlet/10 flex items-center justify-center">
+                    <i [class]="getCategoryIcon(project.category) + ' text-usmc-scarlet'"></i>
+                  </div>
+                  <h3 class="text-lg font-bold card-title">{{ project.title }}</h3>
+                </div>
+                <span class="px-2 py-1 text-xs font-medium rounded-full" [ngClass]="getStatusClass(project.status)">
+                  {{ getStatusLabel(project.status) }}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="card-text mb-4">{{ project.description }}</p>
+
+              <!-- Technologies -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                @for (tech of project.technologies; track tech) {
+                  <span class="px-2 py-1 text-xs bg-usmc-gold/10 text-usmc-gold rounded-md font-medium">
+                    {{ tech }}
+                  </span>
+                }
+              </div>
+
+              <!-- Links -->
+              <div class="flex gap-3">
+                @if (project.link) {
+                  <a [href]="project.link" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center gap-1 text-sm text-usmc-scarlet hover:text-usmc-scarlet-light transition-colors">
+                    <i class="fas fa-external-link-alt"></i>
+                    Live Demo
+                  </a>
+                }
+                @if (project.github) {
+                  <a [href]="project.github" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center gap-1 text-sm card-text hover:text-usmc-gold transition-colors">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                  </a>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Empty State -->
+        @if (filteredProjects.length === 0) {
+          <div class="text-center py-12">
+            <i class="far fa-meh text-6xl text-gray-400 mb-4"></i>
+            <p class="card-text text-lg">No projects in this category yet.</p>
+          </div>
+        }
+
+        <!-- GitHub CTA -->
+        <div class="mt-12 text-center">
+          <a href="https://github.com/bhartman21" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center px-8 py-4 bg-usmc-black hover:bg-usmc-black/80 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-usmc-gold/30">
+            <i class="fab fa-github text-2xl mr-3"></i>
+            View All Repositories on GitHub
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-usmc-black text-white py-8">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <span class="text-usmc-gold font-bold text-xl">Billy</span><span class="text-white font-bold text-xl">Ville</span>
+          </div>
+          <div class="flex space-x-6 mb-4 md:mb-0">
+            <a href="#/" class="text-gray-400 hover:text-usmc-gold transition-colors">Home</a>
+            <a href="#/professional" class="text-gray-400 hover:text-usmc-gold transition-colors">Professional</a>
+            <a href="#/projects" class="text-gray-400 hover:text-usmc-gold transition-colors">Projects</a>
+            <a href="#/community" class="text-gray-400 hover:text-usmc-gold transition-colors">Community</a>
+            <a href="#/about" class="text-gray-400 hover:text-usmc-gold transition-colors">About</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="https://www.linkedin.com/in/billy-hartman-9743221/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-usmc-gold transition-colors" title="LinkedIn">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a href="https://github.com/bhartman21" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-usmc-gold transition-colors" title="GitHub">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+            <p class="text-gray-500 text-sm">&copy; 2025 BillyVille.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,14 @@
+<div class="flex items-center space-x-1 bg-usmc-black/50 rounded-lg p-1">
+  @for (theme of themeOptions; track theme.value) {
+    <button
+      (click)="themeService.setTheme(theme.value)"
+      [title]="theme.label"
+      class="p-2 rounded-md transition-all duration-200"
+      [class.bg-usmc-gold]="themeService.currentTheme() === theme.value"
+      [class.text-usmc-black]="themeService.currentTheme() === theme.value"
+      [class.text-white]="themeService.currentTheme() !== theme.value"
+      [class.hover:bg-white/10]="themeService.currentTheme() !== theme.value">
+      <i [class]="theme.icon + ' text-lg'"></i>
+    </button>
+  }
+</div>

@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Tell Tailwind where to scan for classes */
+@source "../src/**/*.{html,ts}";
+
+/* USMC Color Theme */
+@theme {
+  --color-usmc-scarlet: #C41E3A;
+  --color-usmc-scarlet-dark: #9A1830;
+  --color-usmc-scarlet-light: #E63950;
+  --color-usmc-gold: #FFD700;
+  --color-usmc-gold-dark: #DAA520;
+  --color-usmc-gold-light: #FFE44D;
+  --color-usmc-black: #1A1A1A;
+  --color-usmc-cream: #FDF5E6;
+}
+
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
