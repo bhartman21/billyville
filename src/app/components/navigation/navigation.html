@@ -40,9 +40,47 @@
       </div>
 
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-white hover:text-usmc-gold">
-        <i class="fas fa-bars text-2xl"></i>
+      <button class="md:hidden text-white hover:text-usmc-gold" (click)="toggleMobileMenu()">
+        <i class="fas text-2xl" [class.fa-bars]="!mobileMenuOpen" [class.fa-times]="mobileMenuOpen"></i>
       </button>
     </div>
+
+    <!-- Mobile Menu Panel -->
+    @if (mobileMenuOpen) {
+      <div class="md:hidden border-t border-usmc-gold/20 mt-4 pt-4 pb-2">
+        <div class="flex flex-col space-y-4">
+          @for (link of navLinks; track link.route) {
+            <a [href]="link.href"
+               (click)="closeMobileMenu()"
+               class="transition-colors py-2 px-2 rounded"
+               [class.text-usmc-gold]="isActive(link.route)"
+               [class.bg-usmc-gold/10]="isActive(link.route)"
+               [class.font-semibold]="isActive(link.route)"
+               [class.text-white]="!isActive(link.route)"
+               [class.hover:text-usmc-gold]="!isActive(link.route)"
+               [class.hover:bg-usmc-gold/5]="!isActive(link.route)">
+              {{ link.label }}
+            </a>
+          }
+
+          <!-- Social Links (optional) -->
+          @if (showSocialLinks()) {
+            <div class="flex space-x-6 py-2 px-2">
+              <a href="https://www.linkedin.com/in/billy-hartman-9743221/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-usmc-gold transition-colors" title="LinkedIn">
+                <i class="fab fa-linkedin text-2xl"></i>
+              </a>
+              <a href="https://github.com/bhartman21" target="_blank" rel="noopener noreferrer" class="text-white hover:text-usmc-gold transition-colors" title="GitHub">
+                <i class="fab fa-github text-2xl"></i>
+              </a>
+            </div>
+          }
+
+          <!-- Theme Toggle -->
+          <div class="py-2 px-2">
+            <app-theme-toggle />
+          </div>
+        </div>
+      </div>
+    }
   </nav>
 </header>

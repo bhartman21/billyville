@@ -20,6 +20,7 @@ interface NavLink {
 export class NavigationComponent {
   activeRoute = input<ActiveRoute>('home');
   showSocialLinks = input<boolean>(false);
+  mobileMenuOpen = false;
 
   navLinks: NavLink[] = [
     { label: 'Home', href: '#/', route: 'home' },
@@ -31,5 +32,13 @@ export class NavigationComponent {
 
   isActive(route: ActiveRoute): boolean {
     return this.activeRoute() === route;
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen = false;
   }
 }
